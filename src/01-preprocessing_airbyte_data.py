@@ -41,10 +41,9 @@ def main():
       
       # Setup the source and target db
       source_db, target_db = airbyte_db, raw_db
-      
-      # Check connection
-      with source_db.managed_cursor() as cursor:
-            cursor.execute(f'SELECT * FROM INFORMATION_SCHEMA.DATABASES')
+     
+      # Get the list of tables in the Airbyte database
+      tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
       
       return True
 
