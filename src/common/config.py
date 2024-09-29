@@ -1,18 +1,13 @@
-# def load_airflow_env(env_file:str=None) -> None:
-#       ''' Load Airflow environment. '''
-#       return None
-
-
 def load_local_env(env_file:str=None, logger=None) -> None:
       ''' Load local environment. '''
       
       from dotenv import load_dotenv
-      from common.paths import ROOT_PATH
+      from common.paths import SRC_PATH
       from pathlib import Path
       
       # Check for the arguments
       if env_file is None:
-            env_file = ROOT_PATH / '.env'
+            env_file = SRC_PATH / '.env'
       if not isinstance(env_file, Path):
             env_file = Path(env_file)
       
@@ -24,7 +19,7 @@ def load_local_env(env_file:str=None, logger=None) -> None:
       
       # Check if the env file is a .env file
       if logger is not None:
-            logger.debug(f'Loading environment from {env_file}...')
+            logger.debug(f'Loading environment from that path: {env_file}...')
       return load_dotenv(env_file)
 
 
@@ -55,7 +50,6 @@ def setup_logging(name:str=None) -> None:
             name = 'app'
             
       # Setup the logger
-      logger.remove()
       logger.add(
             LOGS_PATH / f'{name}.log',
             level='DEBUG',

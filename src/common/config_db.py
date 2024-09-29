@@ -2,40 +2,57 @@ from clickhouse_connect import get_client
 from contextlib import contextmanager
 
 
-class DatabaseConnection:
+class DBConnectionClickhouse:
     def __init__(
-          self, 
-          host:str = 'localhost', 
-          port:int = 9000, 
-          username:str = 'default', 
-          password: str = ''
+        self, 
+        host, 
+        port, 
+        username, 
+        password,
+        database,
+        logger = None
     ):
-        self.host = host
-        self.port = port
-        self.username = username
-        self.password = password
+        self._host = host
+        self._port = port
+        self._username = username
+        self._password = password
+        self._database = database
+        
+        # Utils variables
+        self.__logger = logger
 
     @contextmanager
     def managed_cursor(self):
         """Function to create a managed database cursor."""
-        client = get_client(
-              host=self.host, port=self.port, username=self.username, password=self.password
-        )
+        if self.__logger is not None:
+            self.__logger.debug(f"Connecting to database...")
+        
+        # Restart and recreate the client
+        client = None
         try:
-            yield client.cursor()
+            client = get_client(
+                host=self.host, port=self.port, username=self.username, password=self.password, database=self.database
+            )
+            cursor = client.cursor()
+            yield cursor
+            if self.__logger is not None:
+                self.__logger.info("Database operations completed...")
+
+        except Exception as e:
+            if self.__logger is not None:
+                self.__logger.error(f"Unexpected error during database operation: {str(e)}")
+            raise e
+        
         finally:
-            client.close()
+            if client:
+                client.close()
+                if self.__logger is not None:
+                    self.__logger.debug('DB Connection closed...')
 
     def __str__(self) -> str:
-        return f'{self.username}@{self.host}:{self.port}'
+        return f'{self._username}@{self._host}:{self._port}/{self._database}'
 
 
 # Running and testing the main function
 if __name__ == '__main__':
-      None
-      
-      # db = DatabaseConnection()
-      # with db.managed_cursor() as cur:
-      # # cursor and connection are open
-      # cur.execute("YOUR SQL QUERY")
-      # # cursor and connection are closed
+    None
