@@ -1,6 +1,5 @@
 from common.paths import SRC_PATH
-from common.config import setup_logging, \
-      load_local_env, check_env_vars
+from common.config import setup_logging, load_local_env, check_env_vars
 from common.config_db import DBConnectionClickhouse
 
 from pathlib import Path
