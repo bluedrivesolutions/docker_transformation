@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "docker-transformation"
+version = "0.1.0"
+description = ""
+authors = ["mvrckwong-bluedrive <maverickwong@bluedrive.ph>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+dbt-clickhouse = "^1.8.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
