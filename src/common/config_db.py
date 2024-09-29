@@ -9,7 +9,7 @@ class DBConnectionClickhouse:
         port, 
         username, 
         password,
-        database,
+        database = 'default',
         logger = None
     ):
         self._host = host

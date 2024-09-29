@@ -18,15 +18,30 @@ def main():
             logger=logger
       )
       
-      # Connecting to the database
+      # Connecting to the raw database
+      raw_db = DBConnectionClickhouse(
+            host=getenv('CLICKHOUSE_HOST'),
+            port=getenv('CLICKHOUSE_PORT'),
+            username=getenv('CLICKHOUSE_USER'),
+            password=getenv('CLICKHOUSE_PASSWORD'),
+            database='raw',
+            logger=logger
+      )
+      
+      # Connecting to the airbyte database
+      airbyte_db = DBConnectionClickhouse(
+            host=getenv('CLICKHOUSE_HOST'),
+            port=getenv('CLICKHOUSE_PORT'),
+            username=getenv('CLICKHOUSE_USER'),
+            password=getenv('CLICKHOUSE_PASSWORD'),
+            database='airbyte',
+            logger=logger
+      )
+      
+      # Setup the source and target db
+      source_db, target_db = airbyte_db, raw_db
       
       
-      # db = DatabaseConnection()
-      # with db.managed_cursor() as cur:
-      # # cursor and connection are open
-      # cur.execute("YOUR SQL QUERY")
-      # # cursor and connection are closed
-
       return True
 
 # Running the main function
