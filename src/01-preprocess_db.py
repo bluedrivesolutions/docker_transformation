@@ -1,7 +1,9 @@
-from pathlib import Path
 from common.paths import SRC_PATH
 from common.config import setup_logging, \
       load_local_env, check_env_vars
+
+from pathlib import Path
+from os import getenv
 
 # Setup common logging
 logger = setup_logging(Path(__file__).stem)
