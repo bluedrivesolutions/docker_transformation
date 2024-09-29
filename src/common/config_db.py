@@ -31,7 +31,11 @@ class DBConnectionClickhouse:
         client = None
         try:
             client = get_client(
-                host=self.host, port=self.port, username=self.username, password=self.password, database=self.database
+                host=self._host, 
+                port=self._port, 
+                username=self._username, 
+                password=self._password, 
+                database=self._database
             )
             cursor = client.cursor()
             yield cursor

@@ -5,6 +5,7 @@ from common.config_db import DBConnectionClickhouse
 
 from pathlib import Path
 from os import getenv
+import pandas as pd
 
 # Setup common logging
 logger = setup_logging(Path(__file__).stem)
@@ -41,6 +42,9 @@ def main():
       # Setup the source and target db
       source_db, target_db = airbyte_db, raw_db
       
+      # Check connection
+      with source_db.managed_cursor() as cursor:
+            cursor.execute(f'SELECT * FROM INFORMATION_SCHEMA.DATABASES')
       
       return True
 
