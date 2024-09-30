@@ -43,6 +43,7 @@ def main():
      
       # Get the list of tables in the Airbyte database
       tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
+      print(tables)
       
       return True
 

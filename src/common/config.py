@@ -38,7 +38,7 @@ def check_env_vars(env_vars:list=None, logger=None) -> None:
                         f'Environment variable {var} not found!'
                   )
       if logger is not None:
-            logger.debug(f'Environment variables checked successfully!')
+            logger.debug(f'Environment variables available!')
 
 
 def setup_logging(name:str=None) -> None:
