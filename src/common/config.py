@@ -19,7 +19,7 @@ def load_local_env(env_file:str=None, logger=None) -> None:
       
       # Check if the env file is a .env file
       if logger is not None:
-            logger.debug(f'Loading environment from that path: {env_file}...')
+            logger.debug(f'Local environment file available...')
       return load_dotenv(env_file)
 
 
@@ -38,7 +38,7 @@ def check_env_vars(env_vars:list=None, logger=None) -> None:
                         f'Environment variable {var} not found!'
                   )
       if logger is not None:
-            logger.debug(f'Environment variables available!')
+            logger.debug(f'Environment variables available...')
 
 
 def setup_logging(name:str=None) -> None:
