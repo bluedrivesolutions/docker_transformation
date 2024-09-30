@@ -45,6 +45,12 @@ def main():
       tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
       print(tables)
       
+      # Example usage with pandas outside the class
+      query = 'SELECT * FROM your_table'
+      with source_db.managed_client() as client:
+            df = client.query_df(query)
+            print(df.head())
+      
       return True
 
 # Running the main function
