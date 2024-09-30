@@ -33,13 +33,13 @@ class DBConnectionClickhouse:
             client = Client(
                 host=self._host, 
                 port=self._port, 
-                username=self._username, 
+                user=self._username, 
                 password=self._password, 
                 database=self._database
             )
             yield client
             if self.__logger is not None:
-                self.__logger.info("Database operations completed...")
+                self.__logger.info("Database operations running...")
 
         except Exception as e:
             if self.__logger is not None:
@@ -47,10 +47,10 @@ class DBConnectionClickhouse:
             raise e
         
         finally:
-            if client:
-                client.close()
-                if self.__logger is not None:
-                    self.__logger.debug('DB Connection closed...')
+            if client is not None:
+                client.disconnect()
+            if self.__logger is not None:
+                self.__logger.debug('DB Connection closed...')
 
     def __str__(self) -> str:
         return f'{self._username}@{self._host}:{self._port}/{self._database}'
