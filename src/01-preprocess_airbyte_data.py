@@ -34,22 +34,17 @@ def main():
             port=getenv('CLICKHOUSE_PORT'),
             username=getenv('CLICKHOUSE_USER'),
             password=getenv('CLICKHOUSE_PASSWORD'),
-            database='airbyte',
+            database='airbyte_internal',
             logger=logger
       )
       
       # Setup the source and target db
       source_db, target_db = airbyte_db, raw_db
-     
-      # # Get the list of tables in the Airbyte database
-      # tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
-      # print(tables)
       
       # Example usage with pandas outside the class
-      query = 'SELECT * FROM your_table'
-      with source_db.managed_client() as client:
-            df = client.query_df(query)
-            print(df.head())
+      with source_db.managed_cursor() as client:
+            df = client.query_df('SELECT * FROM INFORMATION_SCHEMA.TABLES')
+            # print(df.head())
       
       return True
 
