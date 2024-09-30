@@ -41,9 +41,9 @@ def main():
       # Setup the source and target db
       source_db, target_db = airbyte_db, raw_db
      
-      # Get the list of tables in the Airbyte database
-      tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
-      print(tables)
+      # # Get the list of tables in the Airbyte database
+      # tables = pd.read_sql_query("SHOW TABLES", source_db.engine)[0].tolist()
+      # print(tables)
       
       # Example usage with pandas outside the class
       query = 'SELECT * FROM your_table'
