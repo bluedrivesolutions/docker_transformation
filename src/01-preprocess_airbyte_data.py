@@ -43,7 +43,9 @@ def main():
       
       # Example usage with pandas outside the class
       with source_db.managed_cursor() as client:
+            # Execute the SQL query
             sample = client.execute('SELECT * FROM INFORMATION_SCHEMA.TABLES')
+            
       
       return True
 
