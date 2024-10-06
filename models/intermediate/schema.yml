@@ -4,7 +4,6 @@ sources:
     tables:
       # Fact Tables
       - name: raw_raw__stream_bahigo_altpay_deposit
-      - name: raw_raw__stream_bahigo_altpay_payout
 
       # Dimension Tables
       - name: raw_raw__stream_bahigo_altpay_currency
