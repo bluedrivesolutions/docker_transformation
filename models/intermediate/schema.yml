@@ -1,21 +1,10 @@
-
 version: 2
+sources:
+  - name: airbyte_internal
+    tables:
+      # Fact Tables
+      - name: raw_raw__stream_bahigo_altpay_deposit
 
-models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        data_tests:
-          - unique
-          - not_null
-
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        data_tests:
-          - unique
-          - not_null
+      # Dimension Tables
+      - name: raw_raw__stream_bahigo_altpay_currency
+      - name: raw_raw__stream_bahigo_altpay_paymentservice

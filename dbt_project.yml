@@ -32,5 +32,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   docker_transformation:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    intermediate:
+      +materialized: table
+      +schema: raw
+    staging:
+      +materialized: table
+      +schema: stg
+    production:
+      +materialized: table
+      +schema: prod
