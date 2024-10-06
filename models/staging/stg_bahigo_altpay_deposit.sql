@@ -1,6 +1,7 @@
 {{
 	config(
-		materialized='table'
+		materialized='table',
+            database='staging'
 	) 
 }}
 
@@ -13,7 +14,6 @@ WITH source AS (
       FROM 
             {{ source('raw', 'bahigo_altpay_deposit') }}
 )
-
 SELECT
       -- Airbyte metadata
       _airbyte_raw_id
@@ -52,6 +52,7 @@ SELECT
       , JSONExtractString(_airbyte_data, 'deposit_type_id') as deposit_type_id
       , JSONExtractString(_airbyte_data, 'merchant_user_id') as merchant_user_id
       , JSONExtractString(_airbyte_data, 'settlement_commission') as settlement_commission
+
       , JSONExtractString(_airbyte_data, 'is_chargeback') as is_chargeback
       , JSONExtractString(_airbyte_data, 'callback_status') as callback_status
       , JSONExtractString(_airbyte_data, 'is_timeout') as is_timeout
