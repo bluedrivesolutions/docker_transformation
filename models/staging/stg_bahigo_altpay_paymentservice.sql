@@ -15,39 +15,14 @@ WITH source AS (
             , _airbyte_data
             , _airbyte_extracted_at
             , _airbyte_loaded_at
-            , deposit_id
-            , full_name
-            , customer_email
-            , account
-            , commission
-            , user_id
-            , signature
-            , external_deposit_id
-            , internal_deposit_id
-            , redirect_deposit_id
-            , redirect_complete_url
-            , redirect_cancel_url
-            , external_url
-            , destination_account_details
-            , created
-            , updated
-            , last_decision
-            , state
-            , refunded
-            , note
-            , cancellation_reason
-            , extra_data
-            , currency_id
-            , deposit_type_id
-            , merchant_user_id
-            , settlement_commission
-            , is_chargeback
-            , callback_status
-            , is_timeout
-            , cc_gateway_id
-            , in_process
+            , ps_id
+            , ps_service_code
+            , ps_active
+            , ps_created
+            , ps_updated
+            , ps_logo_url
       FROM 
-            {{ ref('raw_bahigo_altpay_deposit') }}
+            {{ ref('raw_bahigo_altpay_paymentservice') }}
 )
 SELECT 
       *

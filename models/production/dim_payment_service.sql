@@ -12,7 +12,7 @@ WITH source AS (
       SELECT
             *
       FROM 
-            {{ ref('stg_bahigo_altpay_deposit') }}
+            {{ ref('stg_bahigo_altpay_paymentservice') }}
 )
 SELECT
       *
