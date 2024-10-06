@@ -12,9 +12,9 @@
 WITH source AS (
       SELECT
             _airbyte_raw_id
-            , _airbyte_data
-            , _airbyte_extracted_at
-            , _airbyte_loaded_at
+            -- , _airbyte_data
+            -- , _airbyte_extracted_at
+            -- , _airbyte_loaded_at
             , ps_id
             , ps_service_code
             , ps_active

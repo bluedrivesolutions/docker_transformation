@@ -12,9 +12,9 @@
 WITH source AS (
       SELECT
             _airbyte_raw_id
-            , _airbyte_data
-            , _airbyte_extracted_at
-            , _airbyte_loaded_at
+            -- , _airbyte_data
+            -- , _airbyte_extracted_at
+            -- , _airbyte_loaded_at
             , currency_id
             , currency_name
             , currency_code
