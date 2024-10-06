@@ -7,3 +7,5 @@ sources:
       - name: raw_raw__stream_bahigo_altpay_payout
 
       # Dimension Tables
+      - name: raw_raw__stream_bahigo_altpay_currency
+      - name: raw_raw__stream_bahigo_altpay_paymentservice
