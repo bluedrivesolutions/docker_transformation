@@ -1,7 +1,9 @@
+-- The staging model performs initial cleaning and type casting. 
+-- It extracts and formats the JSON data from the _airbyte_data column.
+
 {{
 	config(
-		materialized='table',
-            database='staging'
+		materialized='table'
 	) 
 }}
 
@@ -12,17 +14,17 @@ WITH source AS (
             _airbyte_extracted_at,
             _airbyte_loaded_at
       FROM 
-            {{ source('raw', 'bahigo_altpay_deposit') }}
+            {{ ref('raw_bahigo_altpay_deposit') }}
 )
 SELECT
       -- Airbyte metadata
-      _airbyte_raw_id
-      , _airbyte_data
-      , _airbyte_extracted_at
-      , _airbyte_loaded_at
+      -- _airbyte_raw_id
+      -- , _airbyte_data
+      -- , _airbyte_extracted_at
+      -- , _airbyte_loaded_at
 
       -- Extract fields from _airbyte_data
-      , JSONExtractString(_airbyte_data, 'id') as deposit_id
+      JSONExtractString(_airbyte_data, 'id') as deposit_id
       , JSONExtractString(_airbyte_data, 'full_name') as full_name
       , JSONExtractString(_airbyte_data, 'customer_email') as customer_email
       , JSONExtractString(_airbyte_data, 'account') as account

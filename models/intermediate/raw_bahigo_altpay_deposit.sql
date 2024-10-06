@@ -1,3 +1,5 @@
+-- The raw model represents the data as it comes directly from the source, with minimal to no transformations.
+
 {{
 	config(
 		materialized='table'

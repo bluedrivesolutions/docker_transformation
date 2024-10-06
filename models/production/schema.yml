@@ -1,0 +1,6 @@
+version: 2
+sources:
+  - name: prod
+    tables:
+      # Fact Tables
+      - name: stg_bahigo_altpay_deposit
