@@ -31,7 +31,7 @@ SELECT
       , JSONExtractString(_airbyte_data, 'account') as account
       , JSONExtractString(_airbyte_data, 'commission') as commission
 
-      , JSONExtractString(_airbyte_data, 'external_user_id') as user_id
+      , JSONExtractString(_airbyte_data, 'external_user_id') as external_user_id
       , JSONExtractString(_airbyte_data, 'signature') as signature
       , JSONExtractString(_airbyte_data, 'external_deposit_id') as external_deposit_id
       , JSONExtractString(_airbyte_data, 'internal_deposit_id') as internal_deposit_id
