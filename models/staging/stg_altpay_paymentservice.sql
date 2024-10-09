@@ -11,20 +11,25 @@
 -- models/staging/stg_deposits.sql
 WITH source AS (
       SELECT
-            _airbyte_raw_id
-            -- , _airbyte_data
-            -- , _airbyte_extracted_at
-            -- , _airbyte_loaded_at
-            , ps_id
-            , ps_service_code
-            , ps_active
-            , ps_created
-            , ps_updated
-            , ps_logo_url
+            *
       FROM 
             {{ ref('raw_bahigo_altpay_paymentservice') }}
+      UNION ALL
+      SELECT
+            *
+      FROM 
+            {{ ref('raw_b10_altpay_paymentservice') }}
 )
 SELECT 
-      *
+      _airbyte_raw_id
+      -- , _airbyte_data
+      -- , _airbyte_extracted_at
+      -- , _airbyte_loaded_at
+      , ps_id
+      , ps_service_code
+      , ps_active
+      , ps_created
+      , ps_updated
+      , ps_logo_url
 FROM 
       source

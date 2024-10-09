@@ -12,7 +12,7 @@ WITH source AS (
       SELECT
             *
       FROM 
-            {{ ref('stg_bahigo_altpay_currency') }}
+            {{ ref('stg_altpay_currency') }}
 )
 SELECT
       *
