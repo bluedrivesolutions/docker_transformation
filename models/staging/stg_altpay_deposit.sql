@@ -26,14 +26,16 @@ SELECT
       , signature
 
       -- External deposit IDs
-      , external_deposit_id
-      , internal_deposit_id
-      , redirect_deposit_id
+      -- , external_deposit_id
+      -- , internal_deposit_id
+      -- , redirect_deposit_id
 
       -- Redirect URLs
       , redirect_complete_url
       , redirect_cancel_url
       , external_url
+
+      -- Destination account details
       , destination_account_details
       , created
       , updated
@@ -43,6 +45,8 @@ SELECT
       , note
       , cancellation_reason
       , extra_data
+
+      -- Payment details
       , currency_id
       , deposit_type_id
       , merchant_user_id
@@ -59,3 +63,5 @@ SELECT
       -- , _airbyte_loaded_at
 FROM 
       source
+WHERE
+      deposit_id IS NOT NULL

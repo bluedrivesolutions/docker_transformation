@@ -22,7 +22,8 @@ SELECT
       , ps_active
       , ps_created
       , ps_updated
-      , ps_logo_url
+
+      -- , ps_logo_url
 
       -- , _airbyte_raw_id
       -- , _airbyte_data

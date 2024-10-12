@@ -42,7 +42,6 @@ SELECT
       , JSONExtractString(_airbyte_data, 'external_url') as external_url
       , JSONExtractString(_airbyte_data, 'destination_account_details') as destination_account_details
       , JSONExtractString(_airbyte_data, 'created') as created
-
       , JSONExtractString(_airbyte_data, 'updated') as updated
       , JSONExtractString(_airbyte_data, 'last_decision') as last_decision
       , JSONExtractString(_airbyte_data, 'state') as state
