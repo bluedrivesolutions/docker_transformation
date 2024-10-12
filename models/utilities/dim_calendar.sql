@@ -1,17 +1,21 @@
 {{
       config(
-            materialized='table',
+            materialized='view',
             schema='prod'
       )
 }}
 
+-- configuration
+{% set start_year = var('start_year', 2020) %}
+
+-- selection
 WITH date_spine AS (
       SELECT
-            toDate(concat(toString(toYear(today())), '-01-01')) + number AS date_day
+            toDate('{{ start_year }}-01-01') + number AS date_day
       FROM 
             system.numbers
       LIMIT 
-            dateDiff('day', toDate(concat(toString(toYear(today())), '-01-01')), 
+            dateDiff('day', toDate('{{ start_year }}-01-01'), 
             toDate(concat(toString(toYear(today())), '-12-31'))) + 1
 ),
 date_dimension AS (
