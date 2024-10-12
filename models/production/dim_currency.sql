@@ -18,3 +18,5 @@ SELECT
       *
 FROM 
       source
+ORDER BY 
+      currency_id

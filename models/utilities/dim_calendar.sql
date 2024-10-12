@@ -1,33 +1,37 @@
 {{
-	config(
-		materialized='table'
-        , schema='prod'
-	) 
+      config(
+            materialized='table',
+            schema='prod'
+      )
 }}
 
-WITH numbers AS (
-  SELECT number
-  FROM system.numbers
-  LIMIT dateDiff('day', toDate('2020-01-01'), today()) + 1
-),
-date_spine AS (
-  SELECT toDate('2020-01-01') + number AS date_day
-  FROM numbers
+WITH date_spine AS (
+      SELECT
+            toDate(concat(toString(toYear(today())), '-01-01')) + number AS date_day
+      FROM 
+            system.numbers
+      LIMIT 
+            dateDiff('day', toDate(concat(toString(toYear(today())), '-01-01')), 
+            toDate(concat(toString(toYear(today())), '-12-31'))) + 1
 ),
 date_dimension AS (
-  SELECT
-    toUInt32(date_day) AS date_key,
-    date_day AS full_date,
-    toYear(date_day) AS year,
-    toMonth(date_day) AS month,
-    toDayOfMonth(date_day) AS day,
-    toDayOfWeek(date_day) AS day_of_week,
-    toDayOfYear(date_day) AS day_of_year,
-    toQuarter(date_day) AS quarter,
-    (toDayOfWeek(date_day) IN (6, 7)) AS is_weekend
-    -- formatDateTime(date_day, '%A') AS day_name,
-    -- formatDateTime(date_day, '%B') AS month_name
-  FROM date_spine
+      SELECT
+            date_day AS full_date,
+            toYear(date_day) AS year,
+            toMonth(date_day) AS month,
+            formatDateTime(date_day, '%b') AS month_name,
+            toDayOfMonth(date_day) AS day,
+            toDayOfWeek(date_day) AS day_of_week,
+            formatDateTime(date_day, '%a') AS day_name,
+            toDayOfYear(date_day) AS day_of_year,
+            toQuarter(date_day) AS quarter,
+            if(toDayOfWeek(date_day) IN (6, 7), true, false) AS is_weekend
+      FROM date_spine
 )
-SELECT *
-FROM date_dimension
+
+SELECT 
+      *
+FROM 
+      date_dimension
+ORDER BY 
+      full_date DESC
