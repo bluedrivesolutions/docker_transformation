@@ -1,7 +1,3 @@
--- The production model applies business logic, 
--- creates calculated fields, and structures the data for analytical use.
--- lessen the datas not needed
-
 {{
 	config(
 		materialized='table'
@@ -12,7 +8,7 @@ WITH source AS (
       SELECT
             *
       FROM 
-            {{ ref('stg_altpay_paymentservice') }}
+            {{ ref('stg_altpay_payment_service') }}
 )
 SELECT
       *

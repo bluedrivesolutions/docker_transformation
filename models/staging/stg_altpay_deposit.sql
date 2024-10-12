@@ -1,7 +1,3 @@
--- The staging model performs initial cleaning and type casting. 
--- It extracts and formats the JSON data from the _airbyte_data column.
--- lessen the datas not needed
-
 {{
 	config(
 		materialized='table'
@@ -21,21 +17,20 @@ WITH source AS (
             {{ ref('raw_b10_altpay_deposit') }}
 )
 SELECT 
-      _airbyte_raw_id
-      -- , _airbyte_data
-      -- , _airbyte_extracted_at
-      -- , _airbyte_loaded_at
-
-      , deposit_id
+      deposit_id
       , full_name
       , customer_email
       , account
       , commission
       , external_user_id
       , signature
+
+      -- External deposit IDs
       , external_deposit_id
       , internal_deposit_id
       , redirect_deposit_id
+
+      -- Redirect URLs
       , redirect_complete_url
       , redirect_cancel_url
       , external_url
@@ -57,5 +52,10 @@ SELECT
       , is_timeout
       , cc_gateway_id
       , in_process
+
+      -- , _airbyte_raw_id
+      -- , _airbyte_data
+      -- , _airbyte_extracted_at
+      -- , _airbyte_loaded_at
 FROM 
       source
