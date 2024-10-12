@@ -24,7 +24,6 @@ SELECT
       , ps_updated
 
       -- , ps_logo_url
-
       -- , _airbyte_raw_id
       -- , _airbyte_data
       -- , _airbyte_extracted_at
