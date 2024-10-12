@@ -5,11 +5,11 @@ run_dbt_docs:
 run_all:
 	poetry run dbt run
 
-run_stream_tag:
+run_stream:
 	poetry run dbt run --select tag:streaming
 
-run_batch_tag:
+run_batch:
 	poetry run dbt run --select tag:batch
 
-run_weekly_tag:
+run_weekly:
 	poetry run dbt run --select tag:weekly
