@@ -29,3 +29,5 @@ SELECT DISTINCT
       -- , _airbyte_loaded_at
 FROM 
       source
+WHERE 
+      currency_id IS NOT NULL

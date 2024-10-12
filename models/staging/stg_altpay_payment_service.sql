@@ -31,3 +31,5 @@ SELECT
       -- , _airbyte_loaded_at
 FROM 
       source
+WHERE 
+      ps_id IS NOT NULL
