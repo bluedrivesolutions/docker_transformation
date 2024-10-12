@@ -1,40 +1,33 @@
-{{ config(
-    engine='MergeTree()',
-    order_by='date_key',
-    partition_by='toYear(date_key)',
-    schema='prod'
-) }}
+{{
+	config(
+		materialized='table'
+        , schema='prod'
+	) 
+}}
 
-WITH date_spine AS (
-    {{ dbt_utils.date_spine(
-        datepart="day",
-        start_date="toDate('2010-01-01')",
-        end_date="toDate('2024-12-31')"
-    ) }}
+WITH numbers AS (
+  SELECT number
+  FROM system.numbers
+  LIMIT dateDiff('day', toDate('2020-01-01'), today()) + 1
+),
+date_spine AS (
+  SELECT toDate('2020-01-01') + number AS date_day
+  FROM numbers
+),
+date_dimension AS (
+  SELECT
+    toUInt32(date_day) AS date_key,
+    date_day AS full_date,
+    toYear(date_day) AS year,
+    toMonth(date_day) AS month,
+    toDayOfMonth(date_day) AS day,
+    toDayOfWeek(date_day) AS day_of_week,
+    toDayOfYear(date_day) AS day_of_year,
+    toQuarter(date_day) AS quarter,
+    (toDayOfWeek(date_day) IN (6, 7)) AS is_weekend
+    -- formatDateTime(date_day, '%A') AS day_name,
+    -- formatDateTime(date_day, '%B') AS month_name
+  FROM date_spine
 )
-
-SELECT
-    toDate(date_day) AS date_key,
-    toYear(date_key) AS year,
-    toQuarter(date_key) AS quarter,
-    toMonth(date_key) AS month,
-    toDayOfMonth(date_key) AS day_of_month,
-    toDayOfWeek(date_key) AS day_of_week,
-    toMonday(date_key) AS week_start_date,
-    toISOWeek(date_key) AS iso_week,
---     formatDateTime(date_key, '%b') AS month_name_short,
---     formatDateTime(date_key, '%B') AS month_name_full,
-    formatDateTime(date_key, '%a') AS day_name_short,
-    formatDateTime(date_key, '%W') AS day_name_full,
-    CASE
-        WHEN toMonth(date_key) < 2 THEN toYear(date_key)
-        ELSE toYear(date_key) + 1
-    END AS fiscal_year,
-    CASE
-        WHEN toMonth(date_key) < 2 THEN 4
-        WHEN toMonth(date_key) < 5 THEN 1
-        WHEN toMonth(date_key) < 8 THEN 2
-        WHEN toMonth(date_key) < 11 THEN 3
-        ELSE 4
-    END AS fiscal_quarter
-FROM date_spine
+SELECT *
+FROM date_dimension

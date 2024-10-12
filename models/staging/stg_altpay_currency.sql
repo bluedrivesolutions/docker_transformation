@@ -20,15 +20,16 @@ WITH source AS (
       FROM 
             {{ ref('raw_b10_altpay_currency') }}
 )
-SELECT 
-      _airbyte_raw_id
-      -- , _airbyte_data
-      -- , _airbyte_extracted_at
-      -- , _airbyte_loaded_at
-      , currency_id
+SELECT DISTINCT
+      currency_id
       , currency_name
       , currency_code
       , currency_symbol
       , currency_decimal
+
+      -- , _airbyte_raw_id
+      -- , _airbyte_data
+      -- , _airbyte_extracted_at
+      -- , _airbyte_loaded_at
 FROM 
       source
