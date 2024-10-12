@@ -8,8 +8,8 @@
 WITH date_spine AS (
     {{ dbt_utils.date_spine(
         datepart="day",
-        start_date="toDate('2000-01-01')",
-        end_date="toDate('2050-12-31')"
+        start_date="toDate('2010-01-01')",
+        end_date="toDate('2024-12-31')"
     ) }}
 )
 
