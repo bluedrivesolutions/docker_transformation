@@ -35,9 +35,18 @@ models:
     intermediate:
       +materialized: table
       +schema: raw
+      +tags:
+        - "raw"
+        - "intermediate"
     staging:
       +materialized: table
       +schema: stg
+      +tags:
+        - "stg"
+        - "staging"
     production:
       +materialized: table
       +schema: prod
+      +tags:
+        - "prod"
+        - "production"
