@@ -26,10 +26,5 @@ SELECT DISTINCT
       , currency_code
       , currency_symbol
       , currency_decimal
-
-      -- , _airbyte_raw_id
-      -- , _airbyte_data
-      -- , _airbyte_extracted_at
-      -- , _airbyte_loaded_at
 FROM 
       source
