@@ -1,7 +1,8 @@
 {{
       config(
             materialized='view',
-            schema='prod'
+            schema='prod',
+            tags=['weekly']
       )
 }}
 
@@ -20,16 +21,16 @@ WITH date_spine AS (
 ),
 date_dimension AS (
       SELECT
-            date_day AS full_date,
-            toYear(date_day) AS year,
-            toMonth(date_day) AS month,
-            formatDateTime(date_day, '%b') AS month_name,
-            toDayOfMonth(date_day) AS day,
-            toDayOfWeek(date_day) AS day_of_week,
-            formatDateTime(date_day, '%a') AS day_name,
-            toDayOfYear(date_day) AS day_of_year,
-            toQuarter(date_day) AS quarter,
-            if(toDayOfWeek(date_day) IN (6, 7), true, false) AS is_weekend
+            date_day AS full_date
+            , toYear(date_day) AS year
+            , toMonth(date_day) AS month
+            , formatDateTime(date_day, '%b') AS month_name
+            , toDayOfMonth(date_day) AS day
+            , toDayOfWeek(date_day) AS day_of_week
+            , formatDateTime(date_day, '%a') AS day_name
+            , toDayOfYear(date_day) AS day_of_year
+            , toQuarter(date_day) AS quarter
+            , if(toDayOfWeek(date_day) IN (6, 7), true, false) AS is_weekend
       FROM date_spine
 )
 
