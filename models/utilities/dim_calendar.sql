@@ -30,6 +30,7 @@ date_dimension AS (
             , formatDateTime(date_day, '%a') AS day_name
             , toDayOfYear(date_day) AS day_of_year
             , toQuarter(date_day) AS quarter
+            , CONCAT('Q`', toString(toQuarter(date_day))) AS quarter_name
             , if(toDayOfWeek(date_day) IN (6, 7), true, false) AS is_weekend
       FROM date_spine
 )
