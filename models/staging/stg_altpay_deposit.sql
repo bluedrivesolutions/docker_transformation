@@ -1,7 +1,7 @@
 {{
 	config(
 		materialized='table',
-            tags=['streaming']
+            tags=['stream']
 	) 
 }}
 
@@ -27,9 +27,9 @@ SELECT
       , signature
 
       -- External deposit IDs
-      -- , external_deposit_id
-      -- , internal_deposit_id
-      -- , redirect_deposit_id
+      , external_deposit_id
+      , internal_deposit_id
+      , redirect_deposit_id
 
       -- Redirect URLs
       , redirect_complete_url

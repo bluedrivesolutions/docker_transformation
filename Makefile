@@ -6,7 +6,7 @@ run_all:
 	poetry run dbt run
 
 run_stream:
-	poetry run dbt run --select tag:streaming
+	poetry run dbt run --select tag:stream
 
 run_batch:
 	poetry run dbt run --select tag:batch

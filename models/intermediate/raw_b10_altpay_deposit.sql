@@ -5,7 +5,7 @@
 {{
 	config(
 		materialized='table',
-            tags=['streaming', 'fact']
+            tags=['stream']
 	) 
 }}
 
