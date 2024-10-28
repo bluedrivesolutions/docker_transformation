@@ -1,0 +1,10 @@
+version: '3'
+name: 'dbt-transformation'
+
+services:
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dbt
+    command: ["dbt", "run"]

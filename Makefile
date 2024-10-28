@@ -13,3 +13,6 @@ run_batch:
 
 run_weekly:
 	poetry run dbt run --select tag:weekly
+
+# run_docker_stream:
+# 	sudo docker exec -it dbt bash -c "poetry dbt run --select tag:weekly"
